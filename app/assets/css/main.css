@@ -1,0 +1,38 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@font-face {
+  font-family: Lora-Variable;
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url('/fonts/Lora-Variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: Albert Sans;
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url('/fonts/AlbertSans-VariableFont_wght.ttf') format('woff2');
+}
+
+@font-face {
+  font-family: JetBrains Mono;
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url('/public/fonts/JetBrainsMono[wght].ttf') format('woff2');
+}
+
+@layer components {
+  .prose h1, h2, h3 {
+    @apply font-display font-medium;
+  }
+}
+
+@theme {
+  --font-sans: Albert Sans, sans-serif;
+  --font-display: Lora-Variable, cursive;
+  --font-mono: JetBrains Mono, monospace;
+}
