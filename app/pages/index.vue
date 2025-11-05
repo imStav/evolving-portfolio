@@ -26,7 +26,7 @@ const tabContents = {
   <UContainer class="md:w-3/4 xl:w-2/5 w-11/12 mx-auto">
     <AboutMe />
 
-    <div class="flex gap-2 sticky top-8 z-20">
+    <div class="navbar">
       <UButton
         @click="activeTab = constants.WORK_EXPERIENCES_TAB"
         color="neutral"
@@ -44,7 +44,7 @@ const tabContents = {
       </UButton>
     </div>
 
-    <div class="my-8">
+    <div class="my-4">
       <h1 class="text-3xl font-semibold font-display">{{ tabContents[activeTab]?.title }}</h1>
       <p class="text-muted font-display">
         {{ tabContents[activeTab]?.description }}

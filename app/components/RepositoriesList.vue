@@ -81,7 +81,7 @@ onMounted(fetchRepos)
         />
       </div>
 
-      <p class="my-2 line-clamp-2">{{ repo.description }}</p>
+      <p class="my-2 line-clamp-3">{{ repo.description }}</p>
       <p class="text-sm text-muted mb-4">Last updated: {{ repo.updated_at }}</p>
 
       <div class="flex items-center justify-between">
