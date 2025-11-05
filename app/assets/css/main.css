@@ -25,6 +25,12 @@
   src: url('/public/fonts/JetBrainsMono[wght].ttf') format('woff2');
 }
 
+@layer base {
+  .navbar {
+    @apply flex gap-2 py-4 bg-white dark:bg-gray-900 sticky top-0 z-20;
+  }
+}
+
 @layer components {
   .prose h1, h2, h3 {
     @apply font-display font-medium;
