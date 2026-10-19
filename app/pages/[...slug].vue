@@ -32,7 +32,6 @@ const { data: page } = await useAsyncData(route.path, () => {
           </div>
 
           <p class="text-muted w-fit">
-            {{ page.details.to === 'today' ? 'Since' : '' }}
             {{ calculateDateSpan(page.details.from, page.details.to) }}
           </p>
         </div>
