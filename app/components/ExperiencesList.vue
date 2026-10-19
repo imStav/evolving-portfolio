@@ -31,7 +31,6 @@ const isHovered = ref(false)
         </div>
 
           <p class="text-muted w-fit">
-            {{ experience.details.to === 'today' ? 'Since' : '' }}
             {{ calculateDateSpan(experience.details.from, experience.details.to) }}
           </p>
       </div>

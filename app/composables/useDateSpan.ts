@@ -1,73 +1,48 @@
 /**
  * useDateSpan composable
  *
- * Provides a reusable function to calculate human-readable
- * time spans between two dates (in "yyyy-mm-dd" format).
+ * Provides a reusable function to format a date span the way LinkedIn does:
+ * "Jan 2020 – Present · 5 yrs 8 mos"
  *
- * Example result: "2 years, 5 months, 2 days"
+ * Months are counted inclusively (Jan 2020 → Dec 2020 = "1 yr"),
+ * matching LinkedIn's behavior. Granularity is months only.
  */
 export function useDateSpan() {
   /**
-   * Calculates the span between two dates.
+   * Formats the span between two dates as a LinkedIn-style line.
    * @param startDate - start date in "yyyy-mm-dd" format
-   * @param endDate - end date in "yyyy-mm-dd" format
-   * @returns a human-readable string like "3 years, 5 months, 14 days"
+   * @param endDate - end date in "yyyy-mm-dd" format or "today"
+   * @returns a string like "Jan 2020 – Aug 2025 · 5 yrs 8 mos"
    */
   function calculateDateSpan(startDate: string, endDate: string): string {
-    // Convert the date strings to Date objects
-    const start = new Date(startDate)
-    let end: Date
+    const parse = (date: string) => date.split('-').map(Number)
+    const [sy, sm] = parse(startDate)
+    const [ey, em] = endDate === 'today'
+      ? [new Date().getFullYear(), new Date().getMonth() + 1]
+      : parse(endDate)
 
-    if (endDate === 'today') {
-      end = new Date()
-    } else {
-      end = new Date(endDate)
-    }
-
-    // Check if the provided dates are valid
-    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+    const valid = (year?: number, month?: number) => !!year && !!month && month >= 1 && month <= 12
+    if (!valid(sy, sm) || (endDate !== 'today' && !valid(ey, em))) {
       throw new Error("Invalid date format. Please use 'yyyy-mm-dd'.")
     }
 
-    if (end < start) {
+    if (ey < sy || (ey === sy && em < sm)) {
       throw new Error('End date must be after start date.')
     }
 
-    // Extract components
-    const startYear = start.getFullYear()
-    const startMonth = start.getMonth()
-    const startDay = start.getDate()
+    const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    const fmt = (year: number, month: number) => `${MONTHS[month - 1]} ${year}`
+    const range = `${fmt(sy, sm)} – ${endDate === 'today' ? 'Present' : fmt(ey, em)}`
 
-    const endYear = end.getFullYear()
-    const endMonth = end.getMonth()
-    const endDay = end.getDate()
+    const total = (ey - sy) * 12 + (em - sm) + 1
+    const years = Math.floor(total / 12)
+    const months = total % 12
 
-    // Calculate differences
-    let years = endYear - startYear
-    let months = endMonth - startMonth
-    let days = endDay - startDay
+    const parts = []
+    if (years) parts.push(`${years} yr${years > 1 ? 's' : ''}`)
+    if (months) parts.push(`${months} mo${months > 1 ? 's' : ''}`)
 
-    // Adjust days if needed
-    if (days < 0) {
-      months -= 1
-      // Get number of days in the previous month of `end`
-      const prevMonth = new Date(endYear, endMonth, 0)
-      days += prevMonth.getDate()
-    }
-
-    // Adjust months if needed
-    if (months < 0) {
-      years -= 1
-      months += 12
-    }
-
-    // Build human-readable string
-    const parts: string[] = []
-    if (years > 0) parts.push(`${years} year${years > 1 ? 's' : ''}`)
-    if (months > 0) parts.push(`${months} month${months > 1 ? 's' : ''}`)
-    if (days > 0 || parts.length === 0) parts.push(`${days} day${days > 1 ? 's' : ''}`)
-
-    return parts.join(', ')
+    return `${range} · ${parts.join(' ')}`
   }
 
   return { calculateDateSpan }
