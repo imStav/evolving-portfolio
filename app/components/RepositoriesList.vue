@@ -63,15 +63,15 @@ onMounted(fetchRepos)
 </script>
 
 <template>
-  <UCard 
-    v-for="(repo, index) in repos" 
-    :key="index" 
-    variant="soft" 
+  <UCard
+    v-for="(repo, index) in repos"
+    :key="index"
+    variant="soft"
     class="rounded-xl group"
   >
     <NuxtLink :to="repo.html_url" target="_blank">
       <div class="flex items-center justify-between">
-        <h2 class="text-xl font-medium font-display">{{ repo.name }}</h2>
+        <h2 class="text-xl font-medium">{{ repo.name }}</h2>
         <UButton
           trailing-icon="i-lucide-external-link"
           size="sm"
@@ -85,25 +85,25 @@ onMounted(fetchRepos)
       <p class="text-sm text-muted mb-4">Last updated: {{ repo.updated_at }}</p>
 
       <div class="flex items-center justify-between">
-        <UBadge 
-          variant="soft" 
-          color="secondary" 
-          class="font-mono rounded-full"
+        <UBadge
+          variant="soft"
+          color="primary"
+          class="font-mono rounded-full pb-0.5"
         >
           {{ repo.language }}
         </UBadge>
 
         <div class="flex items-center">
-          <UBadge 
-            color="warning" 
-            variant="soft" 
-            class="mr-2  pl-1.5 rounded-full"
+          <UBadge
+            color="warning"
+            variant="soft"
+            class="mr-2 pl-1.5 rounded-full"
           >
             ⭐{{ repo.stargazers_count }}
           </UBadge>
-          <UBadge 
-            color="neutral" 
-            variant="soft" 
+          <UBadge
+            color="neutral"
+            variant="soft"
             class="pl-1.5 rounded-full"
           >
             🍴 {{ repo.forks_count }}
@@ -118,8 +118,8 @@ onMounted(fetchRepos)
     icon="i-lucide-github"
     trailing-icon="i-lucide-arrow-right"
     label="See more on my Github"
-    :color="isHovered ? 'info' : 'primary'"
-    variant="soft"
+    :color="isHovered ? 'info' : 'neutral'"
+    variant="ghost"
     class="w-fit justify-self-end"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"

@@ -26,12 +26,13 @@ const tabContents = {
   <UContainer class="md:w-3/4 xl:w-2/5 w-11/12 mx-auto">
     <AboutMe />
 
-    <div class="navbar">
+    <div>
       <UButton
         @click="activeTab = constants.WORK_EXPERIENCES_TAB"
         color="neutral"
         :variant="activeTab === constants.WORK_EXPERIENCES_TAB ? 'soft' : 'ghost'"
-      >
+        class="mr-1"
+        >
         {{ constants.WORK_EXPERIENCES_TAB_TITLE }}
       </UButton>
 
@@ -45,8 +46,8 @@ const tabContents = {
     </div>
 
     <div class="my-4">
-      <h1 class="text-3xl font-semibold font-display">{{ tabContents[activeTab]?.title }}</h1>
-      <p class="text-muted font-display">
+      <h1 class="text-3xl font-semibold ">{{ tabContents[activeTab]?.title }}</h1>
+      <p class="text-muted">
         {{ tabContents[activeTab]?.description }}
       </p>
       <div class="grid grid-cols-1 gap-4 my-8">
