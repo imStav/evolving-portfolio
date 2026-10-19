@@ -4,15 +4,15 @@
   >
     <p>
       <span>👋</span> Hi! I'm <strong>Steven A.</strong>, a french
-      <strong>software developer</strong>, currently working at
+      <strong>Solutions Engineer</strong>, currently working at
       <NuxtLink to="https://www.piivo.com/" target="_blank" class="font-bold">@PiiVO</NuxtLink>
-      on cloud solutions for major retail actors like Boulanger group, Leroy Merlin Greece.
+      on cloud solutions for major national and international retail actors (Boulanger, La Redoute, Entrepôt Du Bricolage, Leroy Merlin South Africa and Greece).
     </p>
     <p class="[&>strong]:font-mono">
-      I specialize in <strong>.NET (C#)</strong>, <strong>Vue 3</strong>, and <strong>Azure</strong>, building and automating everything from serverless apps to CI/CD pipelines, while continuously exploring new tools and languages.
+      Specialized in <strong>.NET 8+ (C#)</strong>, <strong>Vue 3</strong>, <strong>Azure</strong> and <strong>Azure DevOps</strong>, I drive projects from idea to production, <strong>solving real business challenges</strong>.
     </p>
     <p>
-      Driven by clean code and continuous improvement, I love turning complex challenges into
+      Driven by clean code, agentic workflows and continuous improvement, I love turning complex challenges into
       elegant solutions.
     </p>
   </div>
