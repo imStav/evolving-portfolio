@@ -15,16 +15,18 @@ export function useDateSpan() {
    * @returns a string like "Jan 2020 – Aug 2025 · 5 yrs 8 mos"
    */
   function calculateDateSpan(startDate: string, endDate: string): string {
-    const parse = (date: string) => date.split('-').map(Number)
-    const [sy, sm] = parse(startDate)
-    const [ey, em] = endDate === 'today'
-      ? [new Date().getFullYear(), new Date().getMonth() + 1]
-      : parse(endDate)
-
-    const valid = (year?: number, month?: number) => !!year && !!month && month >= 1 && month <= 12
-    if (!valid(sy, sm) || (endDate !== 'today' && !valid(ey, em))) {
-      throw new Error("Invalid date format. Please use 'yyyy-mm-dd'.")
+    const parseDate = (date: string): [number, number] => {
+      const [year, month] = date.split('-').map(Number)
+      if (!year || !month || month < 1 || month > 12) {
+        throw new Error("Invalid date format. Please use 'yyyy-mm-dd'.")
+      }
+      return [year, month]
     }
+
+    const [sy, sm] = parseDate(startDate)
+    const [ey, em]: [number, number] = endDate === 'today'
+      ? [new Date().getFullYear(), new Date().getMonth() + 1]
+      : parseDate(endDate)
 
     if (ey < sy || (ey === sy && em < sm)) {
       throw new Error('End date must be after start date.')
